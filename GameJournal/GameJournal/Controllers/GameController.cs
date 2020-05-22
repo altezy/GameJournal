@@ -11,26 +11,37 @@ namespace GameJournal.Controllers
     public class GameController : Controller
     {
         private readonly GameRepository _gameRepository = null;
-       public GameController()
-       {
-           _gameRepository = new GameRepository();
-       }
+        public GameController()
+        {
+            _gameRepository = new GameRepository();
+        }
 
-       public ViewResult GetAllGames()
-       {
+        public ViewResult GetAllGames()
+        {
             var data = _gameRepository.GetAllGames();
             return View(data);
-       }
+        }
 
-        public ViewResult GetGame(int id)
+        public ViewResult GetGame(int id, string nameOfGame)
         {
             var data = _gameRepository.GetGameById(id);
             return View(data);
         }
 
-        public List<GameModel> SearchGames(string gameName,string companyName)
+        public List<GameModel> SearchGames(string gameName, string companyName)
         {
             return _gameRepository.SearchGame(gameName, companyName);
+        }
+
+        public ViewResult AddNewGame()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ViewResult AddNewGame(GameModel gameModel)
+        {
+            return View();
         }
     }
 }
